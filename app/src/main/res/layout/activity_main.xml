@@ -67,23 +67,6 @@
             android:max="200"
             android:progress="100" />
 
-        <!-- Clarity -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Clarity"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:paddingTop="8dp"
-            android:paddingBottom="4dp" />
-
-        <SeekBar
-            android:id="@+id/seekBarClarity"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:max="200"
-            android:progress="100" />
-
         <!-- Shadows -->
         <TextView
             android:layout_width="wrap_content"
@@ -118,74 +101,6 @@
             android:max="200"
             android:progress="100" />
 
-        <!-- Exposure -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Exposure"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:paddingTop="8dp"
-            android:paddingBottom="4dp" />
-
-        <SeekBar
-            android:id="@+id/seekBarExposure"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:max="200"
-            android:progress="100" />
-
-        <!-- Gamma -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Gamma"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:paddingTop="8dp"
-            android:paddingBottom="4dp" />
-
-        <SeekBar
-            android:id="@+id/seekBarGamma"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:max="200"
-            android:progress="100" />
-
-        <!-- Blacks -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Blacks"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:paddingTop="8dp"
-            android:paddingBottom="4dp" />
-
-        <SeekBar
-            android:id="@+id/seekBarBlacks"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:max="200"
-            android:progress="100" />
-
-        <!-- Whites -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Whites"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:paddingTop="8dp"
-            android:paddingBottom="4dp" />
-
-        <SeekBar
-            android:id="@+id/seekBarWhites"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:max="200"
-            android:progress="100" />
-
         <!-- Sharpness -->
         <TextView
             android:layout_width="wrap_content"
@@ -203,22 +118,106 @@
             android:max="200"
             android:progress="100" />
 
-        <!-- Temperature -->
+        <!-- Warmth -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Temperature"
+            android:text="Warmth"
             android:textSize="16sp"
             android:textStyle="bold"
             android:paddingTop="8dp"
             android:paddingBottom="4dp" />
 
         <SeekBar
-            android:id="@+id/seekBarTemperature"
+            android:id="@+id/seekBarWarmth"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:max="200"
             android:progress="100" />
 
+        <!-- Vignette -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Vignette"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:paddingTop="8dp"
+            android:paddingBottom="4dp" />
+
+        <SeekBar
+            android:id="@+id/seekBarVignette"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="200"
+            android:progress="100" />
+
+        <!-- Hue -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hue"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:paddingTop="8dp"
+            android:paddingBottom="4dp" />
+
+        <SeekBar
+            android:id="@+id/seekBarHue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="200"
+            android:progress="100" />
+
+        <!-- Grain -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Grain"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:paddingTop="8dp"
+            android:paddingBottom="4dp" />
+
+        <SeekBar
+            android:id="@+id/seekBarGrain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="200"
+            android:progress="100" />
+
+        <!-- Tint -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tint"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:paddingTop="8dp"
+            android:paddingBottom="4dp" />
+
+        <SeekBar
+            android:id="@+id/seekBarTint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="200"
+            android:progress="100" />
+
+        <!-- Fade -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fade"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:paddingTop="8dp"
+            android:paddingBottom="4dp" />
+
+        <SeekBar
+            android:id="@+id/seekBarFade"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="200"
+            android:progress="100" />
     </LinearLayout>
 </ScrollView>

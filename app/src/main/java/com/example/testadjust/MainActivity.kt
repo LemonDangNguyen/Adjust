@@ -1,101 +1,102 @@
 package com.example.testadjust
 
-import android.graphics.ColorMatrixColorFilter
 import android.os.Bundle
-import android.widget.ImageView
 import android.widget.SeekBar
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
+import com.example.testadjust.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
+    private val viewModel: ImageAdjustmentViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
-        val imageView: ImageView = findViewById(R.id.imageView)
-
-        // Các SeekBar
-        val seekBarBrightness: SeekBar = findViewById(R.id.seekBarBrightness)
-        val seekBarContrast: SeekBar = findViewById(R.id.seekBarContrast)
-        val seekBarSaturation: SeekBar = findViewById(R.id.seekBarSaturation)
-        val seekBarClarity: SeekBar = findViewById(R.id.seekBarClarity)
-        val seekBarShadows: SeekBar = findViewById(R.id.seekBarShadows)
-        val seekBarHighlights: SeekBar = findViewById(R.id.seekBarHighlights)
-        val seekBarExposure: SeekBar = findViewById(R.id.seekBarExposure)
-        val seekBarGamma: SeekBar = findViewById(R.id.seekBarGamma)
-        val seekBarBlacks: SeekBar = findViewById(R.id.seekBarBlacks)
-        val seekBarWhites: SeekBar = findViewById(R.id.seekBarWhites)
-        val seekBarSharpness: SeekBar = findViewById(R.id.seekBarSharpness)
-        val seekBarTemperature: SeekBar = findViewById(R.id.seekBarTemperature)
-
-        val viewModel: ImageAdjustmentViewModel by viewModels()
-
+        // Sử dụng ViewBinding để inflate layout
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         // Quan sát LiveData của bộ lọc màu
         viewModel.colorFilter.observe(this, Observer { filter ->
-            imageView.colorFilter = filter
+            binding.imageView.colorFilter = filter
         })
+        binding.seekBarBrightness.max = 100 // Phạm vi từ 0 đến 100
+        binding.seekBarBrightness.progress = 50 // Đặt giá trị ban đầu ở giữa
+        setSeekBarListener(binding.seekBarBrightness) { value ->
+            // Tính toán giá trị normalizedValue, với 50 là giá trị trung tâm
+            val normalizedValue = (value - 50) / 100f // Phạm vi từ -0.5 đến 0.5
 
-        // Cập nhật giá trị SeekBar và LiveData
-        setSeekBarListener(seekBarBrightness) { value ->
-            viewModel.brightness.value = value / 100f
+            // Cập nhật giá trị brightness trong ViewModel
+            viewModel.brightness.value = normalizedValue
+
+            // Gọi hàm cập nhật bộ lọc để áp dụng thay đổi
             viewModel.updateFilter()
         }
 
-        setSeekBarListener(seekBarContrast) { value ->
-            viewModel.contrast.value = value / 100f
+
+
+        // Thiết lập giá trị tối đa và tối thiểu cho SeekBar
+        binding.seekBarContrast.setMin(-100);
+        binding.seekBarContrast.max = 100 // Phạm vi từ 0 đến 100
+        binding.seekBarContrast.progress = 0 // Đặt giá trị ban đầu ở giữa
+
+// Thiết lập listener cho SeekBar
+        setSeekBarListener(binding.seekBarContrast) { value ->
+            // Tính toán giá trị normalizedValue, với 50 là giá trị trung tâm
+            val normalizedValue = (value - 50) / 100f // Phạm vi từ -0.5 đến 0.5
+
+            // Cập nhật giá trị contrast trong ViewModel
+            viewModel.contrast.value = normalizedValue
+
+            // Gọi hàm cập nhật bộ lọc để áp dụng thay đổi
             viewModel.updateFilter()
         }
 
-        setSeekBarListener(seekBarSaturation) { value ->
-            viewModel.saturation.value = value / 100f
+
+
+        // Thiết lập giá trị tối đa và tối thiểu cho SeekBar
+        binding.seekBarSaturation.max = 1000 // Phạm vi từ -100 đến 1000
+        binding.seekBarSaturation.min = -100 // Phạm vi tối thiểu
+        binding.seekBarSaturation.progress = 500 // Đặt giá trị ban đầu ở giữa (tương ứng với giá trị 0)
+
+
+        setSeekBarListener(binding.seekBarSaturation) { value ->
+            // Chuyển đổi giá trị SeekBar về phạm vi -1 đến 1
+            val normalizedValue = (value - 500) / 500f // Phạm vi từ -1 đến 1
+
+            // Cập nhật độ bão hòa trong ViewModel
+            viewModel.saturation.value = normalizedValue
+
+            // Cập nhật bộ lọc với giá trị bão hòa mới
             viewModel.updateFilter()
         }
 
-        setSeekBarListener(seekBarClarity) { value ->
-            viewModel.clarity.value = value / 100f
+        binding.seekBarShadows.min = 20
+        binding.seekBarShadows.max = 100
+        binding.seekBarShadows.progress = 30
+
+        setSeekBarListener(binding.seekBarShadows) { value ->
+            // Làm chậm sự thay đổi bằng cách chia giá trị difference (tỷ lệ nhỏ hơn)
+            val slowShadowsValue = (value - 50) / 50f * 0.2f  // Điều chỉnh với hệ số nhỏ hơn để giảm tốc độ thay đổi
+            viewModel.shadows.value = slowShadowsValue
             viewModel.updateFilter()
         }
 
-        setSeekBarListener(seekBarShadows) { value ->
-            viewModel.shadows.value = value / 100f
-            viewModel.updateFilter()
+        // Cấu hình SeekBar cho highlights
+        binding.seekBarHighlights.min = 20
+        binding.seekBarHighlights.max = 100
+        binding.seekBarHighlights.progress = 50 // Giá trị mặc định là trung lập
+
+        setSeekBarListener(binding.seekBarHighlights) { value ->
+            // Tính toán giá trị highlights với dải điều chỉnh từ -1 đến 1
+            val highlightsValue = (value - 50) / 50f // Chuyển đổi giá trị từ SeekBar thành tỷ lệ từ -1 đến 1
+            viewModel.highlights.value = highlightsValue // Cập nhật giá trị vào ViewModel
+            viewModel.updateFilter() // Cập nhật bộ lọc với giá trị mới
         }
 
-        setSeekBarListener(seekBarHighlights) { value ->
-            viewModel.highlights.value = value / 100f
-            viewModel.updateFilter()
-        }
 
-        setSeekBarListener(seekBarExposure) { value ->
-            viewModel.exposure.value = value / 100f
-            viewModel.updateFilter()
-        }
-
-        setSeekBarListener(seekBarGamma) { value ->
-            viewModel.gamma.value = value / 100f + 1f
-            viewModel.updateFilter()
-        }
-
-        setSeekBarListener(seekBarBlacks) { value ->
-            viewModel.blacks.value = value / 100f
-            viewModel.updateFilter()
-        }
-
-        setSeekBarListener(seekBarWhites) { value ->
-            viewModel.whites.value = value / 100f
-            viewModel.updateFilter()
-        }
-
-        setSeekBarListener(seekBarSharpness) { value ->
-            viewModel.sharpness.value = value / 100f
-            viewModel.updateFilter()
-        }
-
-        setSeekBarListener(seekBarTemperature) { value ->
-            viewModel.temperature.value = value / 100f
-            viewModel.updateFilter()
-        }
     }
 
     private fun setSeekBarListener(seekBar: SeekBar, onProgressChanged: (Int) -> Unit) {
